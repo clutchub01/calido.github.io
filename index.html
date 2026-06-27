@@ -1,0 +1,2386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálido — Rooftop Restaurant · Tahir Guest Palace Hotel</title>
+  <meta name="description"
+    content="Cálido Rooftop Restaurant at Tahir Guest Palace Hotel. Premium dining, imported cuts, live teppanyaki, and skyline views.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /*──────────────────────────────────────────────
+  TOKENS
+──────────────────────────────────────────────*/
+    :root {
+      --black: #080707;
+      --deep: #0f0e0d;
+      --charcoal: #161412;
+      --mid: #242017;
+      --gold: #c8923a;
+      --gold-bright: #e8b86d;
+      --gold-dim: rgba(200, 146, 58, .18);
+      --gold-glow: rgba(200, 146, 58, .35);
+      --cream: #f5f0e8;
+      --muted: rgba(245, 240, 232, .45);
+      --glass-bg: rgba(255, 255, 255, .04);
+      --glass-border: rgba(200, 146, 58, .22);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--black);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /*──────────────────────────────────────────────
+  CURSOR GLOW (desktop only)
+──────────────────────────────────────────────*/
+    .cursor-glow {
+      pointer-events: none;
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 146, 58, .08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: left .15s ease, top .15s ease;
+    }
+
+    /*──────────────────────────────────────────────
+  NAV
+──────────────────────────────────────────────*/
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 5rem;
+      transition: all .5s ease;
+    }
+
+    nav.solid {
+      background: rgba(8, 7, 7, .88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1rem 5rem;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .nav-logo sup {
+      font-size: .5rem;
+      vertical-align: super;
+      letter-spacing: .3em;
+      font-style: normal;
+      opacity: .6;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center a {
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: rgba(245, 240, 232, .6);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-center a:hover {
+      color: var(--gold);
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-phone {
+      font-size: .7rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-phone:hover {
+      color: var(--gold);
+    }
+
+    .nav-book {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--black);
+      background: var(--gold);
+      padding: .55rem 1.4rem;
+      text-decoration: none;
+      transition: .2s;
+      white-space: nowrap;
+    }
+
+    .nav-book:hover {
+      background: var(--gold-bright);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--cream);
+      transition: .3s;
+    }
+
+    /*──────────────────────────────────────────────
+  MOBILE MENU
+──────────────────────────────────────────────*/
+    .mob-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(8, 7, 7, .97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .mob-menu.open {
+      display: flex;
+    }
+
+    .mob-menu a {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+
+    .mob-menu a:hover {
+      color: var(--gold);
+    }
+
+    .mob-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: var(--cream);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /*──────────────────────────────────────────────
+  HERO
+──────────────────────────────────────────────*/
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ── VIDEO CONTAINER ── */
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* fallback image if no video */
+    .hero-video-wrap .hero-fallback {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=90&auto=format') center/cover no-repeat;
+      animation: kenBurns 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes kenBurns {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.07);
+      }
+    }
+
+    /* ── OVERLAYS ── */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to right, rgba(8, 7, 7, .75) 0%, rgba(8, 7, 7, .2) 60%, transparent 100%),
+        linear-gradient(to top, rgba(8, 7, 7, .95) 0%, rgba(8, 7, 7, .3) 40%, transparent 75%);
+    }
+
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(8, 7, 7, .6) 100%);
+    }
+
+    /* ── CONTENT ── */
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 760px;
+      padding: 0 2rem;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: riseIn .9s .2s forwards;
+    }
+
+    .hero-eyebrow-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-eyebrow-text {
+      font-size: .62rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(4.5rem, 10vw, 8.5rem);
+      line-height: .9;
+      letter-spacing: -.01em;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .hero-title .line {
+      display: block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: lineUp .9s cubic-bezier(.22, .61, .36, 1) forwards;
+    }
+
+    .hero-title .line:nth-child(1) {
+      animation-delay: .4s;
+    }
+
+    .hero-title .line:nth-child(2) {
+      animation-delay: .58s;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-title .line:nth-child(3) {
+      animation-delay: .76s;
+    }
+
+    @keyframes lineUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-desc {
+      font-size: .92rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(245, 240, 232, .65);
+      max-width: 420px;
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: riseIn .9s 1s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: riseIn .9s 1.2s forwards;
+    }
+
+    .btn-fire {
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 1.05rem 2.8rem;
+      background: linear-gradient(135deg, var(--gold) 0%, #a36a1a 100%);
+      color: var(--black);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: .25s;
+    }
+
+    .btn-fire::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+
+    .btn-fire:hover::after {
+      opacity: 1;
+    }
+
+    .btn-fire span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-ghost {
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding: 1.05rem 2.8rem;
+      border: 1px solid rgba(245, 240, 232, .25);
+      color: var(--cream);
+      text-decoration: none;
+      transition: .25s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── BOTTOM BAR ── */
+    .hero-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5rem;
+      border-top: 1px solid rgba(200, 146, 58, .18);
+      background: rgba(8, 7, 7, .4);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      animation: riseIn .8s 1.5s forwards;
+    }
+
+    .hero-bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .hero-bar-label {
+      font-size: .55rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-bar-value {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .hero-bar-value a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .hero-bar-value a:hover {
+      color: var(--gold);
+    }
+
+    .hero-scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      font-size: .55rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: .3
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*──────────────────────────────────────────────
+  MARQUEE
+──────────────────────────────────────────────*/
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: .8rem 0;
+      background: linear-gradient(90deg, var(--black), rgba(200, 146, 58, .06), var(--black));
+    }
+
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 40s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .marquee-item {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold);
+      padding: 0 1.5rem;
+      letter-spacing: .06em;
+    }
+
+    .marquee-sep {
+      color: rgba(200, 146, 58, .35);
+      padding: 0 .5rem;
+      font-style: normal;
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    /*──────────────────────────────────────────────
+  SECTION UTILS
+──────────────────────────────────────────────*/
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-size: .6rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+
+    .eyebrow-line {
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .section-h {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .section-h em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay {
+      transition-delay: .15s;
+    }
+
+    .reveal-delay2 {
+      transition-delay: .3s;
+    }
+
+    /*──────────────────────────────────────────────
+  SIGNATURE SECTION
+──────────────────────────────────────────────*/
+    #signature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
+    }
+
+    .sig-visual {
+      position: relative;
+      overflow: hidden;
+      background:
+        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85&auto=format') center/cover no-repeat;
+    }
+
+    .sig-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 50%, var(--black) 100%),
+        linear-gradient(to bottom, transparent 30%, rgba(8, 7, 7, .5) 100%);
+      z-index: 1;
+    }
+
+    .sig-badge {
+      position: absolute;
+      top: 2.5rem;
+      left: 2.5rem;
+      z-index: 2;
+      font-size: .6rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: .4rem 1rem;
+      border: 1px solid var(--gold-dim);
+      background: rgba(8, 7, 7, .55);
+      backdrop-filter: blur(6px);
+    }
+
+    .sig-right {
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 5rem;
+    }
+
+    .sig-dishes {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+    }
+
+    .sig-dish {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.35rem 0;
+      border-bottom: 1px solid rgba(200, 146, 58, .1);
+      transition: background .2s, padding .2s;
+      cursor: default;
+    }
+
+    .sig-dish:hover {
+      padding-left: .7rem;
+      border-bottom-color: var(--gold-dim);
+    }
+
+    .sig-dish-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+    }
+
+    .sig-dish-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .15rem;
+    }
+
+    .sig-dish-price {
+      font-size: .82rem;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .sig-dish-tag {
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /*──────────────────────────────────────────────
+  MENU SECTION
+──────────────────────────────────────────────*/
+    #menu {
+      padding: 8rem 0 6rem;
+      background: var(--deep);
+      position: relative;
+    }
+
+    #menu::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 0 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .menu-header .eyebrow {
+      justify-content: center;
+    }
+
+    .menu-rule {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      margin: 2rem auto 0;
+    }
+
+    /* ── MENU DYNAMIC BACKGROUND ── */
+    #menu {
+      padding: 8rem 0 6rem;
+      background: var(--deep);
+      position: relative;
+      overflow: hidden;
+      /* Ensures the image doesn't bleed out of the section */
+    }
+
+    .menu-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.6s ease-in-out;
+      opacity: 0.35;
+      /* Keeps the image subtle */
+    }
+
+    /* Dark gradient to blend the image into the page smoothly */
+    .menu-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--deep) 0%, transparent 40%, transparent 70%, var(--deep) 100%);
+    }
+
+    /* Elevate menu content so it sits on top of the new background */
+    .menu-header,
+    .pills-scroll,
+    .menu-panel {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CATEGORY PILLS ── */
+    .pills-scroll {
+      overflow-x: auto;
+      padding: 0 4rem 0;
+    }
+
+    .pills-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pills {
+      display: flex;
+      gap: .7rem;
+      min-width: max-content;
+      margin: 0 auto;
+      width: max-content;
+      padding-bottom: 3rem;
+    }
+
+    .pill {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .6rem 1.5rem;
+      border: 1px solid rgba(200, 146, 58, .2);
+      color: rgba(245, 240, 232, .4);
+      background: transparent;
+      cursor: pointer;
+      transition: .2s;
+      font-family: var(--sans);
+      white-space: nowrap;
+    }
+
+    .pill:hover {
+      border-color: rgba(200, 146, 58, .5);
+      color: rgba(245, 240, 232, .8);
+    }
+
+    .pill.active {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── PANEL HEADER ── */
+    .panel-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 4rem 2rem;
+      margin-bottom: 0;
+      border-bottom: 1px solid rgba(200, 146, 58, .12);
+    }
+
+    .panel-title {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .panel-sub {
+      font-size: .6rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+
+    .panel-count {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      color: rgba(200, 146, 58, .4);
+    }
+
+    /* ── GLASS CARDS GRID ── */
+    .menu-panel {
+      display: none;
+    }
+
+    .menu-panel.active {
+      display: block;
+      animation: panelFade .4s ease;
+    }
+
+    @keyframes panelFade {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      padding: 1px;
+      background: rgba(200, 146, 58, .08);
+      margin: 1px 4rem;
+    }
+
+    /* ── GLASS CARD ── */
+    .glass-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: background .3s, border-color .3s, transform .3s;
+      cursor: default;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(200, 146, 58, .05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .glass-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .4s ease;
+    }
+
+    .glass-card:hover {
+      background: rgba(200, 146, 58, .07);
+      border-color: rgba(200, 146, 58, .45);
+      transform: translateY(-2px);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    .glass-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .card-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.35;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .3rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-price {
+      font-size: .88rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: .04em;
+    }
+
+    .card-price-label {
+      font-size: .52rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* premium badge */
+    .card-premium::before {
+      background: linear-gradient(135deg, rgba(200, 146, 58, .12), transparent 60%);
+      opacity: 1;
+    }
+
+    .card-premium .card-price {
+      color: var(--gold-bright);
+      font-size: 1rem;
+    }
+
+    /*──────────────────────────────────────────────
+  TEPPANYAKI FEATURE
+──────────────────────────────────────────────*/
+    #teppanyaki-feature {
+      position: relative;
+      overflow: hidden;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .teppan-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=1400&q=85&auto=format') center/cover no-repeat;
+    }
+
+    .teppan-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(8, 7, 7, .92) 40%, rgba(8, 7, 7, .5) 100%),
+        linear-gradient(to top, rgba(8, 7, 7, .8) 0%, transparent 60%);
+    }
+
+    .teppan-content {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 5rem;
+      max-width: 640px;
+    }
+
+    .teppan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(200, 146, 58, .15);
+      margin-top: 3rem;
+    }
+
+    .teppan-item {
+      background: rgba(8, 7, 7, .6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(200, 146, 58, .12);
+      padding: 1.4rem 1.6rem;
+      transition: background .25s, border-color .25s;
+    }
+
+    .teppan-item:hover {
+      background: rgba(200, 146, 58, .08);
+      border-color: rgba(200, 146, 58, .35);
+    }
+
+    .teppan-item-jp {
+      font-family: var(--serif);
+      font-size: .75rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: .25rem;
+    }
+
+    .teppan-item-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    .teppan-item-price {
+      font-size: .78rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-top: .4rem;
+    }
+
+    /*──────────────────────────────────────────────
+  EXPERIENCE TRIO
+──────────────────────────────────────────────*/
+    #experience {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .exp-cell {
+      position: relative;
+      height: 460px;
+      overflow: hidden;
+    }
+
+    .exp-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform .8s ease;
+    }
+
+    .exp-cell:hover .exp-img {
+      transform: scale(1.07);
+    }
+
+    .exp-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8, 7, 7, .88) 0%, rgba(8, 7, 7, .15) 60%, transparent 100%);
+    }
+
+    .exp-copy {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem;
+      transform: translateY(12px);
+      transition: transform .4s ease;
+    }
+
+    .exp-cell:hover .exp-copy {
+      transform: none;
+    }
+
+    .exp-num {
+      font-size: .55rem;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .5rem;
+    }
+
+    .exp-title {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .exp-sub {
+      font-size: .78rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: .5rem;
+      opacity: 0;
+      transition: opacity .4s .1s ease;
+    }
+
+    .exp-cell:hover .exp-sub {
+      opacity: 1;
+    }
+
+    /*──────────────────────────────────────────────
+  RESERVE
+──────────────────────────────────────────────*/
+    #reserve {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--charcoal);
+    }
+
+    .reserve-left {
+      padding: 7rem 5rem;
+      border-right: 1px solid rgba(200, 146, 58, .12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .reserve-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .ri-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .ri-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .ri-label {
+      font-size: .58rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .25rem;
+    }
+
+    .ri-value {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    .ri-value a {
+      color: var(--cream);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .ri-value a:hover {
+      color: var(--gold);
+    }
+
+    .reserve-right {
+      padding: 7rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-row .form-group {
+      margin-bottom: 0;
+    }
+
+    .f-label {
+      font-size: .58rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .f-input,
+    .f-select,
+    .f-textarea {
+      background: rgba(245, 240, 232, .04);
+      border: 1px solid rgba(200, 146, 58, .15);
+      color: var(--cream);
+      padding: .9rem 1rem;
+      font-family: var(--sans);
+      font-size: .88rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color .2s, background .2s;
+      -webkit-appearance: none;
+      width: 100%;
+    }
+
+    .f-input:focus,
+    .f-select:focus,
+    .f-textarea:focus {
+      border-color: var(--gold);
+      background: rgba(200, 146, 58, .05);
+    }
+
+    .f-select option {
+      background: var(--charcoal);
+    }
+
+    .f-textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .form-note {
+      font-size: .68rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: .5rem 0 1.2rem;
+    }
+
+    .btn-reserve {
+      width: 100%;
+      padding: 1.1rem;
+      background: linear-gradient(135deg, var(--gold) 0%, #a06820 100%);
+      border: none;
+      color: var(--black);
+      font-family: var(--sans);
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-reserve::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+
+    .btn-reserve:hover::after {
+      opacity: 1;
+    }
+
+    .btn-reserve span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /*──────────────────────────────────────────────
+  FOOTER
+──────────────────────────────────────────────*/
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(200, 146, 58, .15);
+      padding: 5rem 5rem 3rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(245, 240, 232, .06);
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: .1em;
+      line-height: 1;
+      margin-bottom: .8rem;
+      display: block;
+    }
+
+    .footer-tagline {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .footer-about {
+      font-size: .85rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(245, 240, 232, .4);
+      max-width: 260px;
+    }
+
+    .footer-col-title {
+      font-size: .58rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+    }
+
+    .footer-links a {
+      font-size: .85rem;
+      font-weight: 300;
+      color: rgba(245, 240, 232, .45);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      padding-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .footer-vat {
+      font-size: .72rem;
+      letter-spacing: .05em;
+      line-height: 1.7;
+      color: rgba(245, 240, 232, .28);
+    }
+
+    .footer-vat strong {
+      color: rgba(245, 240, 232, .5);
+    }
+
+    .footer-copy {
+      font-size: .65rem;
+      color: rgba(245, 240, 232, .18);
+    }
+
+    /*──────────────────────────────────────────────
+  RESPONSIVE
+──────────────────────────────────────────────*/
+    @media (max-width: 1100px) {
+      nav {
+        padding: 1.4rem 2.5rem;
+      }
+
+      nav.solid {
+        padding: .9rem 2.5rem;
+      }
+
+      .nav-center,
+      .nav-right {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      #signature {
+        grid-template-columns: 1fr;
+      }
+
+      .sig-visual {
+        min-height: 380px;
+      }
+
+      .sig-right {
+        padding: 4rem 2.5rem;
+      }
+
+      #experience {
+        grid-template-columns: 1fr;
+      }
+
+      .exp-cell {
+        height: 320px;
+      }
+
+      #reserve {
+        grid-template-columns: 1fr;
+      }
+
+      .reserve-left,
+      .reserve-right {
+        padding: 5rem 2.5rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+
+      .hero-bar {
+        padding: 1.2rem 2.5rem;
+      }
+
+      .cards-grid {
+        margin: 1px 2rem;
+      }
+
+      .panel-head {
+        padding: 0 2rem 2rem;
+      }
+
+      .pills-scroll {
+        padding: 0 2rem;
+      }
+
+      .teppan-content {
+        padding: 5rem 2.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: clamp(3.2rem, 14vw, 5rem);
+      }
+
+      .hero-bar {
+        display: none;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        margin: 1px 1rem;
+      }
+
+      .panel-head {
+        padding: 0 1rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem;
+      }
+
+      .pills-scroll {
+        padding: 0 1rem;
+      }
+
+      .reserve-left,
+      .reserve-right {
+        padding: 4rem 1.5rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding: 4rem 1.5rem 2rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .sig-right {
+        padding: 3rem 1.5rem;
+      }
+
+      .teppan-content {
+        padding: 4rem 1.5rem;
+      }
+
+      .teppan-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- cursor glow (hidden on touch) -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ═══ NAV ═══ -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">Cálido<sup>ROOFTOP</sup></a>
+    <div class="nav-center">
+      <a href="#menu">Menu</a>
+      <a href="#teppanyaki-feature">Teppanyaki</a>
+      <a href="#experience">Experience</a>
+      <a href="#reserve">Reservations</a>
+    </div>
+    <div class="nav-right">
+      <a href="tel:+23488298333" class="nav-phone">+234 88 298 333</a>
+      <a href="#reserve" class="nav-book">Book a Table</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" onclick="closeMob()">✕</button>
+    <a href="#menu" onclick="closeMob()">Menu</a>
+    <a href="#teppanyaki-feature" onclick="closeMob()">Teppanyaki</a>
+    <a href="#experience" onclick="closeMob()">Experience</a>
+    <a href="#reserve" onclick="closeMob()">Book a Table</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section id="hero">
+    <div class="hero-video-wrap">
+      <video id="heroVideo" autoplay muted playsinline>
+        <source src="assets\video1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-vignette"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Tahir Guest Palace Hotel · Rooftop Dining · Kano</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="line">Where</span>
+        <span class="line">fire</span>
+        <span class="line">meets flavour</span>
+      </h1>
+      <p class="hero-desc">
+        An immersive rooftop experience above the city imported cuts, live teppanyaki, and a menu that crosses
+        continents, under the open Kano sky.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-fire"><span>Explore the Menu</span></a>
+        <a href="#reserve" class="btn-ghost">Book a Table</a>
+      </div>
+    </div>
+
+    <div class="hero-bar">
+      <div class="hero-bar-item">
+        <span class="hero-bar-label">Reach us</span>
+        <span class="hero-bar-value"><a href="tel:+23488298333">+234 88 298 333</a></span>
+      </div>
+      <div class="hero-bar-item">
+        <span class="hero-bar-label">Location</span>
+        <span class="hero-bar-value">Tahir Guest Palace Hotel, Kano</span>
+      </div>
+      <div class="hero-bar-item">
+        <span class="hero-bar-label">Instagram</span>
+        <span class="hero-bar-value"><a href="https://instagram.com/calido_rooftop"
+            target="_blank">@calido_rooftop</a></span>
+      </div>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        Scroll
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Tomahawk Steak <span class="marquee-sep">—</span> ₦25,000</span>
+      <span class="marquee-item">Gyuniko Teppanyaki <span class="marquee-sep">—</span> ₦15,000</span>
+      <span class="marquee-item">Sake Teppanyaki <span class="marquee-sep">—</span> ₦19,000</span>
+      <span class="marquee-item">Rib-Eye Steak <span class="marquee-sep">—</span> ₦25,000</span>
+      <span class="marquee-item">Ebi Teppanyaki <span class="marquee-sep">—</span> ₦18,000</span>
+      <span class="marquee-item">Seared Tuna <span class="marquee-sep">—</span> ₦10,000</span>
+      <span class="marquee-item">Sirloin Steak <span class="marquee-sep">—</span> ₦22,000</span>
+      <span class="marquee-item">Marinated Salmon <span class="marquee-sep">—</span> ₦9,500</span>
+      <!-- duplicate -->
+      <span class="marquee-item">Tomahawk Steak <span class="marquee-sep">—</span> ₦25,000</span>
+      <span class="marquee-item">Gyuniko Teppanyaki <span class="marquee-sep">—</span> ₦15,000</span>
+      <span class="marquee-item">Sake Teppanyaki <span class="marquee-sep">—</span> ₦19,000</span>
+      <span class="marquee-item">Rib-Eye Steak <span class="marquee-sep">—</span> ₦25,000</span>
+      <span class="marquee-item">Ebi Teppanyaki <span class="marquee-sep">—</span> ₦18,000</span>
+      <span class="marquee-item">Seared Tuna <span class="marquee-sep">—</span> ₦10,000</span>
+      <span class="marquee-item">Sirloin Steak <span class="marquee-sep">—</span> ₦22,000</span>
+      <span class="marquee-item">Marinated Salmon <span class="marquee-sep">—</span> ₦9,500</span>
+    </div>
+  </div>
+
+  <!-- ═══ SIGNATURE ═══ -->
+  <section id="signature">
+    <div class="sig-visual">
+      <div class="sig-badge">★ Chef's Signatures</div>
+    </div>
+    <div class="sig-right">
+      <div class="reveal">
+        <div class="eyebrow">
+          <div class="eyebrow-line"></div>Signature Collection
+        </div>
+        <h2 class="section-h">Dishes crafted<br>for those who<br><em>demand the best</em></h2>
+      </div>
+      <div class="sig-dishes reveal reveal-delay">
+        <div class="sig-dish">
+          <span class="sig-dish-name">Tomahawk Steak</span>
+          <div class="sig-dish-meta">
+            <span class="sig-dish-price">₦25,000</span>
+            <span class="sig-dish-tag">Imported Cut</span>
+          </div>
+        </div>
+        <div class="sig-dish">
+          <span class="sig-dish-name">Rib-Eye Steak</span>
+          <div class="sig-dish-meta">
+            <span class="sig-dish-price">₦25,000</span>
+            <span class="sig-dish-tag">Imported Cut</span>
+          </div>
+        </div>
+        <div class="sig-dish">
+          <span class="sig-dish-name">Sake Teppanyaki — Salmon</span>
+          <div class="sig-dish-meta">
+            <span class="sig-dish-price">₦19,000</span>
+            <span class="sig-dish-tag">Live Teppanyaki</span>
+          </div>
+        </div>
+        <div class="sig-dish">
+          <span class="sig-dish-name">Ebi Teppanyaki — Prawn</span>
+          <div class="sig-dish-meta">
+            <span class="sig-dish-price">₦18,000</span>
+            <span class="sig-dish-tag">Live Teppanyaki</span>
+          </div>
+        </div>
+        <div class="sig-dish">
+          <span class="sig-dish-name">Sirloin Steak</span>
+          <div class="sig-dish-meta">
+            <span class="sig-dish-price">₦22,000</span>
+            <span class="sig-dish-tag">Imported Cut</span>
+          </div>
+        </div>
+        <div class="sig-dish">
+          <span class="sig-dish-name">Seared Tuna</span>
+          <div class="sig-dish-meta">
+            <span class="sig-dish-price">₦10,000</span>
+            <span class="sig-dish-tag">Raw Corner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MENU ═══ -->
+  <section id="menu">
+    <div class="menu-bg" id="menuBg"></div>
+
+    <div class="menu-header reveal">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>Full Menu<div class="eyebrow-line"></div>
+      </div>
+      <h2 class="section-h">Every plate, <em>a story</em></h2>
+      <div class="menu-rule"></div>
+    </div>
+
+    <div class="pills-scroll">
+      <div class="pills" id="pills">
+        <button class="pill active" data-p="soups">Soups</button>
+        <button class="pill" data-p="starters">Starters</button>
+        <button class="pill" data-p="raw">Raw Corner</button>
+        <button class="pill" data-p="salads">Salads</button>
+        <button class="pill" data-p="burgers">Burgers</button>
+        <button class="pill" data-p="mexican">Mexican</button>
+        <button class="pill" data-p="mains">Main Course</button>
+        <button class="pill" data-p="steaks">Imported Cuts</button>
+        <button class="pill" data-p="teppanyaki">Teppanyaki</button>
+        <button class="pill" data-p="desserts">Desserts</button>
+      </div>
+    </div>
+
+    <!-- SOUPS -->
+    <div class="menu-panel active" id="p-soups">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 01</div>
+          <div class="panel-title">Sopa</div>
+        </div>
+        <div class="panel-count">2 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Roasted Pepper & Tomato Soup</span>
+          <div class="card-right"><span class="card-price">₦3,200</span><span class="card-price-label">Per
+              serving</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Potato Soup</span>
+          <div class="card-right"><span class="card-price">₦3,500</span><span class="card-price-label">Per
+              serving</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STARTERS -->
+    <div class="menu-panel" id="p-starters">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 02</div>
+          <div class="panel-title">Entrantes</div>
+        </div>
+        <div class="panel-count">9 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Buffalo Chicken Samosas</span>
+          <div class="card-right"><span class="card-price">₦4,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Spring Rolls</span>
+          <div class="card-right"><span class="card-price">₦3,800</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Cheese Burger Rolls</span>
+          <div class="card-right"><span class="card-price">₦4,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Bresaola Rolls</span>
+          <div class="card-right"><span class="card-price">₦4,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Rock Shrimps</span>
+          <div class="card-right"><span class="card-price">₦7,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Calido Shrimps</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Jalapeño Poppers</span>
+          <div class="card-right"><span class="card-price">₦7,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Crispy Calamari</span>
+          <div class="card-right"><span class="card-price">₦8,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Chicken Tenders</span>
+          <div class="card-right"><span class="card-price">₦4,500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAW CORNER -->
+    <div class="menu-panel" id="p-raw">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 03</div>
+          <div class="panel-title">Esquina Cruda</div>
+        </div>
+        <div class="panel-count">5 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Beef Tataki</span>
+          <div class="card-right"><span class="card-price">₦5,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Cured Salmon</span>
+          <div class="card-right"><span class="card-price">₦9,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Marinated Salmon</span>
+          <div class="card-right"><span class="card-price">₦9,500</span></div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Seared Tuna</span>
+          <div class="card-right"><span class="card-price">₦10,000</span><span class="card-price-label">Premium</span>
+          </div>
+        </div>
+        <div class="glass-card"><span class="card-name">Shrimp Ceviche</span>
+          <div class="card-right"><span class="card-price">₦8,500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALADS -->
+    <div class="menu-panel" id="p-salads">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 04</div>
+          <div class="panel-title">Ensalada</div>
+        </div>
+        <div class="panel-count">7 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Fresh Burrata Salad</span>
+          <div class="card-right"><span class="card-price">₦7,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Crispy Goat Cheese</span>
+          <div class="card-right"><span class="card-price">₦7,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Quinoa Salad</span>
+          <div class="card-right"><span class="card-price">₦6,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Quinoa Chicken</span>
+          <div class="card-right"><span class="card-price">₦8,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Quinoa Shrimps</span>
+          <div class="card-right"><span class="card-price">₦9,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Peruvian Salad</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Goat Cheese Mille-feuille</span>
+          <div class="card-right"><span class="card-price">₦7,500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="menu-panel" id="p-burgers">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 05</div>
+          <div class="panel-title">Burgers & Sandwiches</div>
+        </div>
+        <div class="panel-count">6 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Texas Style Burger</span>
+          <div class="card-right"><span class="card-price">₦7,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Cranbrie Burger</span>
+          <div class="card-right"><span class="card-price">₦7,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Mushroom & Swiss Burger</span>
+          <div class="card-right"><span class="card-price">₦7,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Nashville Chicken</span>
+          <div class="card-right"><span class="card-price">₦6,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Chicken Avocado Sandwich</span>
+          <div class="card-right"><span class="card-price">₦6,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Steak Sandwich</span>
+          <div class="card-right"><span class="card-price">₦5,500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEXICAN -->
+    <div class="menu-panel" id="p-mexican">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 06</div>
+          <div class="panel-title">Auténtico Mexicano</div>
+        </div>
+        <div class="panel-count">8 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Beef Birria Taco</span>
+          <div class="card-right"><span class="card-price">₦7,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Beef Chimichurri Taco</span>
+          <div class="card-right"><span class="card-price">₦7,300</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Chicken Birria Taco</span>
+          <div class="card-right"><span class="card-price">₦7,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Beef Quesadillas</span>
+          <div class="card-right"><span class="card-price">₦6,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Chicken Quesadillas</span>
+          <div class="card-right"><span class="card-price">₦6,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Shrimp Burrito</span>
+          <div class="card-right"><span class="card-price">₦6,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Nachos Tex-Mex</span>
+          <div class="card-right"><span class="card-price">₦6,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Enchiladas</span>
+          <div class="card-right"><span class="card-price">₦6,000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAINS -->
+    <div class="menu-panel" id="p-mains">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 07</div>
+          <div class="panel-title">Plato Principal</div>
+        </div>
+        <div class="panel-count">6 dishes</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Chicken Tijuana</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Chicken Fajita</span>
+          <div class="card-right"><span class="card-price">₦6,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Beef Tenderloin</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Sliced Beef Pan</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Grilled Fish Fillet</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Katsu Chicken Curry</span>
+          <div class="card-right"><span class="card-price">₦8,000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEAKS -->
+    <div class="menu-panel" id="p-steaks">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 08</div>
+          <div class="panel-title">Cortes Importados</div>
+        </div>
+        <div class="panel-count">4 cuts</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card card-premium"><span class="card-name">Tomahawk Steak</span>
+          <div class="card-right"><span class="card-price">₦25,000</span><span class="card-price-label">Signature</span>
+          </div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">T-Bone Steak</span>
+          <div class="card-right"><span class="card-price">₦20,000</span><span class="card-price-label">Imported</span>
+          </div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Sirloin Steak</span>
+          <div class="card-right"><span class="card-price">₦22,000</span><span class="card-price-label">Imported</span>
+          </div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Rib-Eye Steak</span>
+          <div class="card-right"><span class="card-price">₦25,000</span><span class="card-price-label">Signature</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEPPANYAKI -->
+    <div class="menu-panel" id="p-teppanyaki">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 09</div>
+          <div class="panel-title">鉄板焼き Teppanyaki</div>
+        </div>
+        <div class="panel-count">8 preparations</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Gyuniko — Beef</span>
+          <div class="card-right"><span class="card-price">₦15,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Niwatori — Chicken</span>
+          <div class="card-right"><span class="card-price">₦14,000</span></div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Ebi — Prawn</span>
+          <div class="card-right"><span class="card-price">₦18,000</span><span class="card-price-label">Premium</span>
+          </div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Sake — Salmon</span>
+          <div class="card-right"><span class="card-price">₦19,000</span><span class="card-price-label">Premium</span>
+          </div>
+        </div>
+        <div class="glass-card"><span class="card-name">Sakana — Fish</span>
+          <div class="card-right"><span class="card-price">₦15,000</span></div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Shifudo — Seafood</span>
+          <div class="card-right"><span class="card-price">₦18,000</span><span class="card-price-label">Premium</span>
+          </div>
+        </div>
+        <div class="glass-card"><span class="card-name">Mazeru — Mixed</span>
+          <div class="card-right"><span class="card-price">₦15,000</span></div>
+        </div>
+        <div class="glass-card card-premium"><span class="card-name">Umi To Riku — Surf & Turf</span>
+          <div class="card-right"><span class="card-price">₦16,000</span><span class="card-price-label">Signature</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="menu-panel" id="p-desserts">
+      <div class="panel-head">
+        <div>
+          <div class="panel-sub">Category 10</div>
+          <div class="panel-title">Postres</div>
+        </div>
+        <div class="panel-count">4 desserts</div>
+      </div>
+      <div class="cards-grid">
+        <div class="glass-card"><span class="card-name">Churros</span>
+          <div class="card-right"><span class="card-price">₦4,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Fried Chocolate Rolls</span>
+          <div class="card-right"><span class="card-price">₦4,000</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Tres-Leche Cake</span>
+          <div class="card-right"><span class="card-price">₦4,500</span></div>
+        </div>
+        <div class="glass-card"><span class="card-name">Tiramisu</span>
+          <div class="card-right"><span class="card-price">₦4,500</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TEPPANYAKI FEATURE ═══ -->
+  <section id="teppanyaki-feature">
+    <div class="teppan-bg"></div>
+    <div class="teppan-overlay"></div>
+    <div class="teppan-content">
+      <div class="reveal">
+        <div class="eyebrow">
+          <div class="eyebrow-line"></div>Live Experience
+        </div>
+        <h2 class="section-h" style="font-size:clamp(2.5rem,5vw,4.5rem)">The art of<br><em>teppanyaki</em></h2>
+        <p
+          style="font-size:.9rem;font-weight:300;line-height:1.9;color:rgba(245,240,232,.55);margin-top:1.2rem;max-width:420px">
+          Watch as our chefs work the hot iron griddle tableside — flame, precision, and theatre in one. Each protein,
+          cooked to order, in the Japanese tradition.
+        </p>
+      </div>
+      <div class="teppan-grid reveal reveal-delay">
+        <div class="teppan-item">
+          <div class="teppan-item-jp">牛肉</div>
+          <div class="teppan-item-name">Gyuniko — Beef</div>
+          <div class="teppan-item-price">₦15,000</div>
+        </div>
+        <div class="teppan-item">
+          <div class="teppan-item-jp">海老</div>
+          <div class="teppan-item-name">Ebi — Prawn</div>
+          <div class="teppan-item-price">₦18,000</div>
+        </div>
+        <div class="teppan-item">
+          <div class="teppan-item-jp">鮭</div>
+          <div class="teppan-item-name">Sake — Salmon</div>
+          <div class="teppan-item-price">₦19,000</div>
+        </div>
+        <div class="teppan-item">
+          <div class="teppan-item-jp">海と陸</div>
+          <div class="teppan-item-name">Umi To Riku — Surf & Turf</div>
+          <div class="teppan-item-price">₦16,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EXPERIENCE ═══ -->
+  <section id="experience">
+    <div class="exp-cell">
+      <div class="exp-img"
+        style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=80&auto=format')">
+      </div>
+      <div class="exp-overlay"></div>
+      <div class="exp-copy">
+        <div class="exp-num">01 — Cuisine</div>
+        <h3 class="exp-title">Global flavours,<br>one kitchen</h3>
+        <p class="exp-sub">From Mexican birria to Japanese teppanyaki — every cuisine done with intention.</p>
+      </div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-img"
+        style="background-image:url('https://images.unsplash.com/photo-1544025162-d76694265947?w=700&q=80&auto=format')">
+      </div>
+      <div class="exp-overlay"></div>
+      <div class="exp-copy">
+        <div class="exp-num">02 — Premium Cuts</div>
+        <h3 class="exp-title">Imported beef,<br>flawlessly prepared</h3>
+        <p class="exp-sub">Tomahawk. Rib-Eye. Sirloin. The finest cuts, cooked to your preference.</p>
+      </div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-img"
+        style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80&auto=format')">
+      </div>
+      <div class="exp-overlay"></div>
+      <div class="exp-copy">
+        <div class="exp-num">03 — Atmosphere</div>
+        <h3 class="exp-title">Kano,<br>from above</h3>
+        <p class="exp-sub">Open sky, city lights, and an experience worth every moment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESERVE ═══ -->
+  <section id="reserve">
+    <div class="reserve-left">
+      <div class="reveal">
+        <div class="eyebrow">
+          <div class="eyebrow-line"></div>Reservations
+        </div>
+        <h2 class="section-h">Reserve<br>your <em>evening</em></h2>
+        <p
+          style="font-size:.88rem;font-weight:300;line-height:1.9;color:rgba(245,240,232,.5);margin-top:1.2rem;max-width:360px">
+          For celebrations, business dinners, or an evening you want to remember — Cálido's team will take care of every
+          detail.
+        </p>
+      </div>
+      <div class="reserve-info-list reveal reveal-delay">
+        <div class="ri-item">
+          <div class="ri-icon">✆</div>
+          <div>
+            <div class="ri-label">Telephone</div>
+            <div class="ri-value"><a href="tel:+23488298333">+234 88 298 333</a></div>
+          </div>
+        </div>
+        <div class="ri-item">
+          <div class="ri-icon">◎</div>
+          <div>
+            <div class="ri-label">Instagram</div>
+            <div class="ri-value"><a href="https://instagram.com/calido_rooftop" target="_blank">@calido_rooftop</a>
+            </div>
+          </div>
+        </div>
+        <div class="ri-item">
+          <div class="ri-icon">📍</div>
+          <div>
+            <div class="ri-label">Address</div>
+            <div class="ri-value">Tahir Guest Palace Hotel, Kano, Nigeria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reserve-right reveal reveal-delay">
+      <div class="form-row" style="margin-bottom:1rem">
+        <div class="form-group">
+          <label class="f-label">Full Name</label>
+          <input class="f-input" type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="f-label">Phone Number</label>
+          <input class="f-input" type="tel" placeholder="+234 ...">
+        </div>
+      </div>
+      <div class="form-row" style="margin-bottom:1rem">
+        <div class="form-group">
+          <label class="f-label">Date</label>
+          <input class="f-input" type="date">
+        </div>
+        <div class="form-group">
+          <label class="f-label">Time</label>
+          <input class="f-input" type="time">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="f-label">Party Size</label>
+        <select class="f-select">
+          <option>1 – 2 guests</option>
+          <option>3 – 4 guests</option>
+          <option>5 – 6 guests</option>
+          <option>7 – 10 guests</option>
+          <option>Private event (10+)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="f-label">Special Requests</label>
+        <textarea class="f-textarea" placeholder="Occasion, dietary requirements, preferences..."></textarea>
+      </div>
+      <p class="form-note">Our team will call within 2 hours to confirm your booking.</p>
+      <button class="btn-reserve" id="reserveBtn"><span>Request Reservation</span></button>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <span class="footer-logo">Cálido</span>
+        <div class="footer-tagline">Rooftop Restaurant · Tahir Guest Palace Hotel</div>
+        <p class="footer-about">
+          A rooftop dining destination above Kano — where global flavours, imported cuts, and live teppanyaki come
+          together under the open Nigerian sky.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#menu">Full Menu</a></li>
+          <li><a href="#teppanyaki-feature">Teppanyaki</a></li>
+          <li><a href="#experience">The Experience</a></li>
+          <li><a href="#reserve">Book a Table</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Menu</div>
+        <ul class="footer-links">
+          <li><a href="#menu" onclick="setPanel('steaks')">Imported Cuts</a></li>
+          <li><a href="#menu" onclick="setPanel('teppanyaki')">Teppanyaki</a></li>
+          <li><a href="#menu" onclick="setPanel('mexican')">Authentic Mexican</a></li>
+          <li><a href="#menu" onclick="setPanel('raw')">Raw Corner</a></li>
+          <li><a href="#menu" onclick="setPanel('desserts')">Desserts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+23488298333">+234 88 298 333</a></li>
+          <li><a href="https://instagram.com/calido_rooftop" target="_blank">@calido_rooftop</a></li>
+          <li><a href="#reserve">Make a Reservation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-vat">
+        <strong>Pricing Note —</strong> All menu prices are subject to a <strong>10% service charge</strong> and
+        <strong>7.5% VAT</strong>. Displayed prices are base prices before applicable taxes and charges.
+      </p>
+      <p class="footer-copy">© 2025 Cálido Restaurant · Tahir Guest Palace Hotel, Kano, Nigeria. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ── CURSOR GLOW ── */
+    const glow = document.getElementById('cursorGlow');
+    if (!('ontouchstart' in window)) {
+      document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    } else { glow.style.display = 'none'; }
+
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('solid', window.scrollY > 80);
+    }, { passive: true });
+
+    /* ── MOBILE NAV ── */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobMenu').classList.add('open');
+    });
+    function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
+
+    /* ── MENU PILLS & DYNAMIC BACKGROUND ── */
+    const menuImages = {
+      soups: 'assets/soups.jpg',
+      starters: 'assets/starters.jpg',
+      raw: 'assets/raw.jpg',
+      salads: 'assets/salads.jpg',
+      burgers: 'assets/burgers.jpg',
+      mexican: 'assets/mexican.jpg',
+      mains: 'assets/mains.jpg',
+      steaks: 'assets/steaks.jpg',
+      teppanyaki: 'assets/teppanyaki.jpg',
+      desserts: 'assets/desserts.jpg'
+    };
+
+    // PRELOAD IMAGES
+    function preloadMenuImages() {
+      // Small delay so it doesn't interrupt the hero video loading
+      setTimeout(() => {
+        Object.values(menuImages).forEach(url => {
+          const img = new Image();
+          img.src = url;
+        });
+      }, 1000);
+    }
+
+    // Run the preloader
+    window.addEventListener('load', preloadMenuImages);
+
+    const menuBg = document.getElementById('menuBg');
+
+    // Set initial background image
+    menuBg.style.backgroundImage = `url('${menuImages['soups']}')`;
+
+    function setPanel(panelId) {
+      // Toggle active classes
+      document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.p === panelId));
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.toggle('active', p.id === 'p-' + panelId));
+
+      // Update the background image smoothly
+      if (menuImages[panelId]) {
+        menuBg.style.backgroundImage = `url('${menuImages[panelId]}')`;
+      }
+    }
+
+    document.getElementById('pills').addEventListener('click', e => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      setPanel(pill.dataset.p);
+      pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+
+    /* ── SCROLL REVEAL ── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── RESERVATION BUTTON ── */
+    document.getElementById('reserveBtn').addEventListener('click', function () {
+      const btn = this;
+      btn.querySelector('span').textContent = 'Request Sent ✓';
+      btn.style.background = 'linear-gradient(135deg, #3a7a52, #2a5c3c)';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.querySelector('span').textContent = 'Request Reservation';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    });
+
+    /* ── MULTI-VIDEO LOOP ── */
+    const videos = [
+      'assets/video1.mp4',
+      'assets/video2.mp4',
+      'assets/video3.mp4',
+      'assets/video4.mp4',
+      'assets/video5.mp4',
+      'assets/video6.mp4',
+    ];
+    let current = 0;
+    const heroVideo = document.getElementById('heroVideo');
+    const source = heroVideo.querySelector('source');
+
+    heroVideo.addEventListener('ended', () => {
+      current = (current + 1) % videos.length;
+      source.src = videos[current];
+      heroVideo.load();
+      heroVideo.play();
+    });
+  </script>
+</body>
+
+</html>
